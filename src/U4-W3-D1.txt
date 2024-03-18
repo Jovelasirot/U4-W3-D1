@@ -67,7 +67,13 @@ HAVING COUNT(*) > 2;
 ----------------------------
 
 Es10 - "[EXTRA] Estrarre il totale degli importi delle fatture divisi per residenza dei clienti"
+
+
+
 ----------------------------
 
 Es11 - "[EXTRA] Estrarre il numero dei clienti nati nel 1980 che hanno almeno una fattura superiore a 50 euro"
 
+SELECT * FROM client c join invoice i  ON c.number_client = i.id_client WHERE EXTRACT(YEAR FROM birthday) = 1982 and i.import > 50
+
+----------------------------
