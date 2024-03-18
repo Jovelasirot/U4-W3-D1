@@ -68,7 +68,10 @@ HAVING COUNT(*) > 2;
 
 Es10 - "[EXTRA] Estrarre il totale degli importi delle fatture divisi per residenza dei clienti"
 
-
+SELECT SUM(i.import) AS total_import, c.region_residency
+FROM client c
+JOIN invoice i ON c.number_client = i.id_client
+GROUP BY c.region_residency;
 
 ----------------------------
 
