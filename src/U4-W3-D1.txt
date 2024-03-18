@@ -1,25 +1,61 @@
 U4-W3-D1 Hm
 
 Es1 - "Estrai tutti i clienti con nome Mario"
+
 SELECT * from client where name = 'Mario'
+
+----------------------------
 
 Es2 - "Estrarre il nome e il cognome dei clienti nati nel 1982"
 
+SELECT * FROM client WHERE EXTRACT(YEAR FROM birthday) = 1982
+
+----------------------------
+
 Es3 - "Estrarre il numero delle fatture con iva al 20%"
+
+SELECT * from invoice where vat = 20
+
+----------------------------
 
 Es4 - "Estrarre i prodotti attivati nel 2017 e che sono in produzione oppure in commercio (Per estrarre l’anno da una data si può usare EXTRACT(YEAR FROM data)"
 
+SELECT * FROM product WHERE EXTRACT(YEAR FROM activation_date) = 2017 AND (in_production = true OR on_sale = true);
+
+----------------------------
+
 Es5 - "Estrarre le fatture con importo inferiore a 1000 e i dati dei clienti ad esse collegate"
+
+SELECT * FROM invoice i left join client c ON c.number_client = i.id_client WHERE i.import < 1000;
+
+----------------------------
 
 Es6 - "Riportare l’elenco delle fatture (numero, importo, iva e data) con in aggiunta il nome del fornitore"
 
+SELECT number_invoice, import, vat, s.classification FROM invoice i left join suppliers s  ON i.number_supplier = s.number_supplier
+
+----------------------------
+
 Es7 - "Considerando soltanto le fatture con iva al 20 per cento, estrarre il numero di fatture per ogni anno (Per estrarre l’anno da una data si può usare EXTRACT(YEAR FROM data)"
+
+SELECT EXTRACT(YEAR FROM invoice_date) invoice_year, COUNT (*) invoice_year
+FROM invoice
+WHERE vat = 20
+GROUP BY EXTRACT(YEAR FROM invoice_date);
+
+----------------------------
 
 Es8 - "Riportare il numero di fatture e la somma dei relativi importi divisi per anno di fatturazione"
 
+
+
+----------------------------
+
 Es9 - "[EXTRA] Estrarre gli anni in cui sono state registrate più di 2 fatture con tipologia ‘A’"
+----------------------------
 
 Es10 - "[EXTRA] Estrarre il totale degli importi delle fatture divisi per residenza dei clienti"
+----------------------------
 
 Es11 - "[EXTRA] Estrarre il numero dei clienti nati nel 1980 che hanno almeno una fattura superiore a 50 euro"
 
