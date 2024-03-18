@@ -47,11 +47,23 @@ GROUP BY EXTRACT(YEAR FROM invoice_date);
 
 Es8 - "Riportare il numero di fatture e la somma dei relativi importi divisi per anno di fatturazione"
 
-
+SELECT EXTRACT(YEAR FROM invoice_date) invoice_year,
+COUNT(*) numero_fatture,
+SUM(import) sum_import
+FROM invoice
+WHERE vat > 0
+GROUP BY EXTRACT(YEAR FROM invoice_date);
 
 ----------------------------
 
 Es9 - "[EXTRA] Estrarre gli anni in cui sono state registrate più di 2 fatture con tipologia ‘A’"
+
+SELECT EXTRACT(YEAR FROM invoice_date) invoice_year
+FROM invoice
+WHERE type = 'A'
+GROUP BY EXTRACT(YEAR FROM invoice_date)
+HAVING COUNT(*) > 2;
+
 ----------------------------
 
 Es10 - "[EXTRA] Estrarre il totale degli importi delle fatture divisi per residenza dei clienti"
