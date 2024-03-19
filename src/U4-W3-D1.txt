@@ -8,13 +8,13 @@ SELECT * from client where name = 'Mario'
 
 Es2 - "Estrarre il nome e il cognome dei clienti nati nel 1982"
 
-SELECT * FROM client WHERE EXTRACT(YEAR FROM birthday) = 1982
+SELECT name, surname FROM client WHERE EXTRACT(YEAR FROM birthday) = 1982
 
 ----------------------------
 
 Es3 - "Estrarre il numero delle fatture con iva al 20%"
 
-SELECT * from invoice where vat = 20
+SELECT number_invoice from invoice where vat = 20
 
 ----------------------------
 
@@ -68,7 +68,7 @@ HAVING COUNT(*) > 2;
 
 Es10 - "[EXTRA] Estrarre il totale degli importi delle fatture divisi per residenza dei clienti"
 
-SELECT SUM(i.import) AS total_import, c.region_residency
+SELECT SUM(i.import) total_import, c.region_residency
 FROM client c
 JOIN invoice i ON c.number_client = i.id_client
 GROUP BY c.region_residency;
@@ -77,6 +77,5 @@ GROUP BY c.region_residency;
 
 Es11 - "[EXTRA] Estrarre il numero dei clienti nati nel 1980 che hanno almeno una fattura superiore a 50 euro"
 
-SELECT * FROM client c join invoice i  ON c.number_client = i.id_client WHERE EXTRACT(YEAR FROM birthday) = 1982 and i.import > 50
-
+SELECT  COUNT(*) client_count FROM client c join invoice i  ON c.number_client = i.id_client WHERE EXTRACT(YEAR FROM birthday) = 1982 and i.import > 50
 ----------------------------
